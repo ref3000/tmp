@@ -1,9 +1,44 @@
 <!DOCTYPE html>
 <html>
-<head>
-<title>てすと</title>
-</head>
-<body>
-ぼでぃ
-</body>
-<html>
+  <head>
+    <title>てすと</title>
+  </head>
+  <body>
+    ボディ
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-firestore.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyBksdSskxZM-cibOqMDTZ4AqnuC1OQlmbs",
+        authDomain: "firestore-tmp.firebaseapp.com",
+        databaseURL: "https://firestore-tmp.firebaseio.com",
+        projectId: "firestore-tmp",
+        storageBucket: "firestore-tmp.appspot.com",
+        messagingSenderId: "35998960151",
+        appId: "1:35998960151:web:5fef135ddc6da63c86ea52",
+      };
+      var app = firebase.initializeApp(config);
+      var db = firebase.firestore(app);
+
+      // データの取得
+      var docRef = db.collection("cities").doc("SF");
+      docRef
+        .get()
+        .then(function (doc) {
+          if (doc.exists) {
+            console.log("Document data:", doc.data());
+          } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+          }
+        })
+        .catch(function (error) {
+          console.log("Error getting document:", error);
+        });
+    </script>
+  </body>
+  <html></html>
+</html>
