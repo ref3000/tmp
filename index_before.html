@@ -19,13 +19,13 @@
     reloadActions();
 
     function getStone(x, y) {
-      if (x < 0 || x > 7 || y < 0 || y > 7) return -1;
-      return field[y][x];
+      if (x < 1 || x > 8 || y < 1 || y > 8) return -1;
+      return field[y - 1][x - 1];
     }
 
     function setStone(x, y, stone) {
-      if (x < 0 || x > 7 || y < 0 || y > 7) return;
-      field[y][x] = stone;
+      if (x < 1 || x > 8 || y < 1 || y > 8) return;
+      field[y - 1][x - 1] = stone;
     }
 
     function drawRect(color, x, y, w, h) {
@@ -43,26 +43,21 @@
 
     function drawField() {
       drawRect("white", 0, 0, 800, 800);
-      for (var y = 0; y < 8; y++) {
-        for (var x = 0; x < 8; x++) {
-          drawRect("green", x * 100, y * 100, 99, 99);
-          if (getStone(x, y) == 1) drawCircle("black", x * 100 + 50, y * 100 + 50, 44);
-          if (getStone(x, y) == 2) drawCircle("white", x * 100 + 50, y * 100 + 50, 44);
+      for (var y = 1; y <= 8; y++) {
+        for (var x = 1; x <= 8; x++) {
+          drawRect("green", (x - 1) * 100, (y - 1) * 100, 99, 99);
+          if (getStone(x, y) == 1) drawCircle("black", x * 100 - 50, y * 100 - 50, 44);
+          if (getStone(x, y) == 2) drawCircle("white", x * 100 - 50, y * 100 - 50, 44);
         }
       }
     }
 
     function onClick(e) {
       var rect = e.target.getBoundingClientRect()
-      var x = Math.floor((e.clientX - rect.left) / 100)
-      var y = Math.floor((e.clientY - rect.top) / 100)
+      var x = Math.floor((e.clientX - rect.left) / 100) + 1
+      var y = Math.floor((e.clientY - rect.top) / 100) + 1
       if (canReverse(currentStone, x, y)) {
-        actions.push({
-          x: x,
-          y: y,
-          stone: currentStone
-        });
-        reloadActions();
+        addAction(x, y, currentStone);
       }
     }
 
@@ -80,10 +75,10 @@
     function reloadActions() {
       currentStone = 1;
       field = Array.from(new Array(8), () => new Array(8).fill(0));
-      setStone(3, 4, 1);
-      setStone(4, 3, 1);
-      setStone(3, 3, 2);
+      setStone(4, 5, 1);
+      setStone(5, 4, 1);
       setStone(4, 4, 2);
+      setStone(5, 5, 2);
       for (var i = 0; i < actions.length; i++) {
         var action = actions[i];
         putStone(action.x, action.y, action.stone);
@@ -110,6 +105,15 @@
       if (getStone(x, y) == stone) return;
       setStone(x, y, stone);
       reverse(stone, x + dx, y + dy, dx, dy);
+    }
+
+    function addAction(x, y, stone) {
+      actions.push({
+        x: x,
+        y: y,
+        stone: stone
+      });
+      reloadActions();
     }
   </script>
 </body>
