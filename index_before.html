@@ -57,12 +57,12 @@
       var x = Math.floor((e.clientX - rect.left) / 100)
       var y = Math.floor((e.clientY - rect.top) / 100)
       if (canReverse(currentStone, x, y)) {
-        var id = ("000" + (actions.length + 1)).slice(-3);
-        db.collection("actions").doc(id).set({
+        actions.push({
           x: x,
           y: y,
           stone: currentStone
         });
+        reloadActions();
       }
     }
 
@@ -111,35 +111,6 @@
       setStone(x, y, stone);
       reverse(stone, x + dx, y + dy, dx, dy);
     }
-  </script>
-
-  <!-- The core Firebase JS SDK is always required and must be listed first -->
-  <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-firestore.js"></script>
-  <script>
-    // Initialize Firebase
-    var config = {
-      apiKey: "AIzaSyBksdSskxZM-cibOqMDTZ4AqnuC1OQlmbs",
-      authDomain: "firestore-tmp.firebaseapp.com",
-      databaseURL: "https://firestore-tmp.firebaseio.com",
-      projectId: "firestore-tmp",
-      storageBucket: "firestore-tmp.appspot.com",
-      messagingSenderId: "35998960151",
-      appId: "1:35998960151:web:5fef135ddc6da63c86ea52",
-    };
-    var app = firebase.initializeApp(config);
-    var db = firebase.firestore(app);
-
-    db.collection("actions").onSnapshot(function (querySnapshot) {
-      console.log("onSnapshot");
-      querySnapshot.docChanges().forEach(function (change) {
-        if (change.type === "added") {
-          actions.push(change.doc.data());
-        }
-      });
-      reloadActions();
-    });
   </script>
 </body>
 
