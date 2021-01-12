@@ -8,3 +8,9 @@ func TestGetHoge(t *testing.T) {
         t.Errorf("failed...")
     }
 }
+
+func TestGetFuga(t *testing.T) {
+    if getFuga() != "fuga" {
+        t.Errorf("failed...")
+    }
+}
