@@ -9,6 +9,12 @@ Golang で CI / CD するサンプル
 
 Github Actions と CodeCov を利用
 
+## Test
+
+```
+go test ./... -v 
+```
+
 ## Run
 
 ```
