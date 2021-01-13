@@ -22,8 +22,9 @@ go build -o ./build/hogeapp ./cmd/hogeapp
 ./build/hogeapp
 ```
 
-## Build image
+## Build image & Run
 
 ```
 docker build -t hogeapp .
+docker run hogeapp
 ```
