@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(getHoge() + getFuga())
+	fmt.Println(getHoge() + getFuga() + getPuyo())
 }
 
 func getHoge() string {
@@ -12,4 +12,8 @@ func getHoge() string {
 
 func getFuga() string {
 	return "fuga"
+}
+
+func getPuyo() string {
+	return "puyo"
 }

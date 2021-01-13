@@ -14,3 +14,9 @@ func TestGetFuga(t *testing.T) {
         t.Errorf("failed...")
     }
 }
+
+func TestGetPuyo(t *testing.T) {
+    if getPuyo() != "puyo" {
+        t.Errorf("failed...")
+    }
+}
