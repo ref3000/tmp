@@ -8,3 +8,22 @@
 Golang で CI / CD するサンプル
 
 Github Actions と CodeCov を利用
+
+## Run
+
+```
+go run ./cmd/hogeapp
+```
+
+## Build & Run
+
+```
+go build -o ./build/hogeapp ./cmd/hogeapp
+./build/hogeapp
+```
+
+## Build image
+
+```
+docker build -t hogeapp .
+```
